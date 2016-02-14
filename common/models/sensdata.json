@@ -1,0 +1,27 @@
+{
+  "name": "Sensdata",
+  "plural": "Sensdatas",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "sens_id": {
+      "type": "number",
+      "required": true
+    },
+    "val": {
+      "type": "number",
+      "required": true
+    },
+    "type": {
+      "type": "string",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}

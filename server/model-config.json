@@ -35,5 +35,13 @@
   "Room": {
     "dataSource": "db",
     "public": true
+  },
+  "Sensdata": {
+    "dataSource": "db",
+    "public": true
+  },
+  "Sensor": {
+    "dataSource": "db",
+    "public": true
   }
 }

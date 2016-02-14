@@ -1,6 +1,11 @@
 var loopback = require('loopback');
 var boot = require('loopback-boot');
 
+var redis = require("redis"),
+    redis_client = redis.createClient();
+
+
+
 var app = module.exports = loopback();
 
 app.start = function() {
@@ -21,11 +26,39 @@ app.start = function() {
 boot(app, __dirname, function(err) {
   if (err) throw err;
 
-var idx=0;
   // start the server if `$ node server.js`
   if (require.main === module){
     //app.start();
+    
+     
+    
+      redis_client.on("message", function (channel, message) {
+      //console.log("Nodejs : "+ message);
+      
+      var res = message.split(":");
+      
+      if(res[0]=="SN"){
+        
+        var Sensdata = app.models.Sensdata;
+          Sensdata.create({
+            sens_id:res[1],
+            val:res[2],
+            type:res[3].replace(/\r?\n|\r/g, ""),
+            received:new Date()
+          });
+        
+      }
+      
+    });
+    
+    
+    redis_client.subscribe("messages");
+
+    
     app.io = require('socket.io')(app.start(),{origins:'localhost:*'});
+    app.redis_client =redis_client;
+    
+    
     app.io.on('connection', function(socket){
       console.log('a user connected');
 
@@ -34,9 +67,16 @@ var idx=0;
           console.log('joining room', room);
           socket.join(room);
       });
+      
+      socket.on('leave', function(room) {
+          console.log('Leaving room'+room);
+          socket.leave(room);
+      });
+      
+     
 
       socket.on('message',function(message){
-        console.log(message);
+        //console.log(message);
         if(message.room){
           app.io.to(message.room).emit('message',message);
         }else{

@@ -18,16 +18,16 @@ module.exports = function(Room) {
       }
     );
 
-    Room.observe('after save', function(ctx, next) {
-        if (ctx.instance) {
-          console.log('Saved %s#%s', ctx.Model.modelName, ctx.instance.id);
-          Room.app.io.emit('room_created',ctx.instance);
-          
-        } else {
-          console.log('Updated %s matching %j',
-            ctx.Model.pluralModelName,
-            ctx.where);
-        }
-        next();
-    });
+      Room.observe('after save', function(ctx, next) {
+          if (ctx.instance) {
+            console.log('Saved %s#%s', ctx.Model.modelName, ctx.instance.id);
+            Room.app.io.emit('room_created',ctx.instance);
+            
+          } else {
+            console.log('Updated %s matching %j',
+              ctx.Model.pluralModelName,
+              ctx.where);
+          }
+          next();
+      });
 };
