@@ -14,34 +14,34 @@
     ]
   },
   "User": {
-    "dataSource": "db"
+    "dataSource": "mongodb"
   },
   "AccessToken": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "ACL": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "RoleMapping": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Role": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": false
   },
   "Room": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Sensdata": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   },
   "Sensor": {
-    "dataSource": "db",
+    "dataSource": "mongodb",
     "public": true
   }
 }

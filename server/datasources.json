@@ -2,5 +2,10 @@
   "db": {
     "name": "db",
     "connector": "memory"
+  },
+  "mongodb": {
+    "name": "mongodb",
+    "connector": "mongodb",
+    "url": "mongodb://nodeapp:nodeapp@ds055905.mongolab.com:55905/mysensor"
   }
 }
